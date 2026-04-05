@@ -48,9 +48,9 @@
                     graph TD
                         subgraph Net[VPC Network]
                             EFS[(Amazon EFS)]
-                            EC2_A[EC2 A] -- Mount:NFS --> EFS
-                            EC2_B[EC2 B] -- Mount:NFS --> EFS
-                            EC2_C[EC2 C] -- Mount:NFS --> EFS
+                            EC2_A[EC2 A] -- Mount NFS --> EFS
+                            EC2_B[EC2 B] -- Mount NFS --> EFS
+                            EC2_C[EC2 C] -- Mount NFS --> EFS
                         end
                         style EFS fill:#2ecc71,stroke:#fff;
                         style EC2_A fill:#232f3e,stroke:#fff;

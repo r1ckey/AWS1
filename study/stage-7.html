@@ -61,9 +61,9 @@
                     graph TD
                         User((User)) --> CF[CloudFront / ALB]
                         subgraph SecurityLayer[Security Defense]
-                            CF -- HTTPS --- ACM[ACM: SSL Certificate]
-                            CF -- フィルタリング --- WAF[AWS WAF: L7 Rule]
-                            CF -- DDoS Protection --- Shield[AWS Shield: L3/L4]
+                            CF -- HTTPS --> ACM["ACM - SSL Certificate"]
+                            CF -- フィルタリング --> WAF["AWS WAF - L7 Rule"]
+                            CF -- DDoS防御 --> Shield["AWS Shield - L3/L4"]
                         end
                         CF --> Origin[App Resource]
                         style WAF fill:#e74c3c,stroke:#fff;

@@ -47,8 +47,8 @@
                     <p>利用形態に合わせて、最もお得なプランを選択します。</p>
                     <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
                     graph LR
-                        OD[オンデマンド: 高] -- コミット --> SP[Savings Plans: 低]
-                        OD -- 予備キャパ利用 --> Spot[Spot Instances: 極低]
+                        OD["オンデマンド - 高"] -- コミット --> SP["Savings Plans - 低"]
+                        OD -- 予備キャパ利用 --> Spot["Spot Instances - 極低"]
                         subgraph Discount[コスト削減効果]
                             SP
                             Spot

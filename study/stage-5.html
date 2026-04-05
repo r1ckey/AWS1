@@ -47,7 +47,7 @@
                     <p>ELB は、複数のEC2インスタンスへ負荷を分散し、システムの耐障害性を高めます。</p>
                     <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
                     graph TD
-                        User((User)) --> ALB[ALB: Application Load Balancer]
+                        User((User)) --> ALB["ALB - Application Load Balancer"]
                         subgraph ASG[Auto Scaling Group]
                             ALB --> EC2_A[EC2 Instance A]
                             ALB --> EC2_B[EC2 Instance B]
