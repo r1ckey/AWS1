@@ -6,6 +6,8 @@
     <title>Study: Stage 8 コンテナ / CI/CD | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -72,7 +74,19 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>「コードを書く」「テストする」「配備（デプロイ）する」という一連の作業（DevOps）を完全に自動化します。これにより、開発者は「Pushするだけ」で、最新のコードがシステムに反映される仕組みを作れます。</p>
+                    <p>DevOpsを支える一連の自動化パイプラインです。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph LR
+                        Git[CodeCommit] --> Build[CodeBuild]
+                        Build --> Registry[ECR]
+                        Registry --> Deploy[CodeDeploy]
+                        Deploy --> ECS[ECS / Fargate]
+                        Pipeline((CodePipeline)) -. 制御 .- Git
+                        Pipeline -. 制御 .- Build
+                        Pipeline -. 制御 .- Deploy
+                        style Pipeline fill:#ff9900,stroke:#fff;
+                        style ECS fill:#28a745,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

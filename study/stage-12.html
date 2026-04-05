@@ -6,6 +6,8 @@
     <title>Study: Stage 12 ストレージ応用 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -41,7 +43,18 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>インスタンスが消えてもデータが残るだけでなく、複数のマシンから同じファイルを同時に編集・参照できる、ネットワーク共有フォルダのようなサービスです。Linux環境での共有設定（NFSプロトコル）で利用されます。</p>
+                    <p>EFSは、複数のEC2から同時にアクセス可能な共有ファイルシステムです。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        subgraph Net[VPC Network]
+                            EFS[(Amazon EFS)]
+                            EC2_A[EC2 A] -- Mount:NFS --> EFS
+                            EC2_B[EC2 B] -- Mount:NFS --> EFS
+                            EC2_C[EC2 C] -- Mount:NFS --> EFS
+                        end
+                        style EFS fill:#2ecc71,stroke:#fff;
+                        style EC2_A fill:#232f3e,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

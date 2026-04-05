@@ -6,6 +6,8 @@
     <title>Study: Stage 1 VPC | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -42,8 +44,25 @@
                 <img src="../images/vpc_architecture_diagram.png" alt="VPC Architecture Diagram" class="architecture-diagram">
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>VPCは、オンプレミスのデータセンターで運用するネットワークと非常によく似た、AWSクラウド内の仮想ネットワークです。自分専用の隔離された環境で、サーバー（EC2）やデータベース（RDS）を安全に配置できます。</p>
-                    <p>ポイントは、<strong>「リージョン」の中に作成する</strong>ことです。東京リージョンにVPCを作れば、その中のすべてのアベイラビリティーゾーン（AZ）でリソースを配置できます。</p>
+                    <p>VPCは、オンプレミスのデータセンターで運用するネットワークと非常によく似た、AWSクラウド内の仮想ネットワークです。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        subgraph VPC[AWS VPC 10.0.0.0/16]
+                            subgraph Pub[Public Subnet]
+                                EC2_1[Web Server]
+                            end
+                            subgraph Pri[Private Subnet]
+                                EC2_2[DB Server]
+                            end
+                        end
+                        Internet((Internet)) <--> IGW[Internet Gateway]
+                        IGW <--> Pub
+                        Pub --> NAT[NAT Gateway]
+                        NAT <--> Pri
+                        style VPC fill:#232f3e,stroke:#fff;
+                        style Pub fill:#2ecc71,stroke:#000;
+                        style Pri fill:#e67e22,stroke:#000;
+                    </div>
                 </div>
             </section>
 

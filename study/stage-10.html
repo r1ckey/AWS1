@@ -6,6 +6,8 @@
     <title>Study: Stage 10 高度なネットワーク | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -70,7 +72,16 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>VPCが増えるにつれて、それらを相互に繋ぐのは大変になります。Transit Gatewayを使えば、全てのネットワークを一つの大きなハブに繋ぐだけで、ルーティングを整理できます。</p>
+                    <p>複雑なネットワーク接続をシンプルに統合します。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        TGW((Transit Gateway)) --- VPC1[VPC A]
+                        TGW --- VPC2[VPC B]
+                        TGW --- VPC3[VPC C]
+                        TGW --- DC[Direct Connect: オンプレ]
+                        style TGW fill:#ff9900,stroke:#fff;
+                        style DC fill:#2c3e50,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

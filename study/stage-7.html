@@ -6,6 +6,8 @@
     <title>Study: Stage 7 セキュリティ高度化 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -54,7 +56,20 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>外部からの攻撃に対して、IP許可、レート制限、特定の国のブロックなど、詳細なセキュリティルールを設定できます。ALB、CloudFront、API Gatewayなど、外部公開されるサービスに適用することで強固な壁となります。</p>
+                    <p>外部からの攻撃に対して、多層的な防御を構築します。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        User((User)) --> CF[CloudFront / ALB]
+                        subgraph SecurityLayer[Security Defense]
+                            CF -- HTTPS --- ACM[ACM: SSL Certificate]
+                            CF -- フィルタリング --- WAF[AWS WAF: L7 Rule]
+                            CF -- DDoS Protection --- Shield[AWS Shield: L3/L4]
+                        end
+                        CF --> Origin[App Resource]
+                        style WAF fill:#e74c3c,stroke:#fff;
+                        style Shield fill:#c0392b,stroke:#fff;
+                        style ACM fill:#2ecc71,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

@@ -19,7 +19,8 @@ class QuizEngine {
     async init() {
         // Load questions (local fetch from static JSON)
         try {
-            const response = await fetch(`../data/stage-${this.stageId}.json`);
+            const response = await fetch(`../data/questions-stage${this.stageId}.json`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             this.questions = await response.json();
             this.totalQEl.textContent = this.questions.length;
             this.renderQuestion();

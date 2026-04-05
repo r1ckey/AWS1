@@ -6,6 +6,8 @@
     <title>Study: Stage 0 基礎知識 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -104,7 +106,22 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>「お客様がすべてを管理する必要はない」というクラウドの核心概念です。物理的なサーバーラックや電源、仮想化レイヤーはAWSが責任を持ちます。一方で、サーバーにインストールしたOSの設定や、保存したデータの暗号化、アクセス権の管理などは、利用者が責任を持って行う必要があります。</p>
+                    <p>「お客様がすべてを管理する必要はない」というクラウドの核心概念です。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        subgraph User["お客様の責任 (Security IN the Cloud)"]
+                            D[データ / 暗号化]
+                            A[アプリケーション / OS]
+                            I[IAM / アクセス権]
+                        end
+                        subgraph AWS["AWSの責任 (Security OF the Cloud)"]
+                            P[物理インフラ / データセンター]
+                            N[ネットワーク / 仮想化レイヤー]
+                            S[サーバーハードウェア]
+                        end
+                        style User fill:#3498db,stroke:#fff;
+                        style AWS fill:#ff9900,stroke:#222;
+                    </div>
                 </div>
             </section>
 

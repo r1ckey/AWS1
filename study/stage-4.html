@@ -6,6 +6,8 @@
     <title>Study: Stage 4 RDS / Aurora | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -56,7 +58,27 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>ミッションクリティカルなシステムでは、Multi-AZ構成が必須です。プライマリDBがダウンした場合でも、DNSの書き換えにより数分以内で自動的にスタンバイDBが昇格し、エンドユーザーへの影響を最小限に抑えます。これはあくまで「高可用性」のための機能であり、パフォーマンス向上用ではありません。</p>
+                    <p>ミッションクリティカルなシステムでは、Multi-AZ構成が必須です。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        subgraph Region[AWS Region]
+                            subgraph AZ1[AZ 1]
+                                P[Primary DB]
+                            end
+                            subgraph AZ2[AZ 2]
+                                S[Standby DB]
+                            end
+                            subgraph AZ3[AZ 3]
+                                RR[Read Replica]
+                            end
+                        end
+                        P -- 同期複製 --> S
+                        P -. 非同期複製 .-> RR
+                        App[Application] -- Write/Read --> P
+                        App -. Read .-> RR
+                        style P fill:#ff9900,stroke:#fff;
+                        style RR fill:#3498db,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

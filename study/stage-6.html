@@ -6,6 +6,8 @@
     <title>Study: Stage 6 S3 / CloudFront / Route 53 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -60,7 +62,17 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>CloudFrontは、ユーザーの物理的に近い拠点からデータを送ることで、遅延を最小限に抑えるサービスです。特に動画配信や画像、JavaScriptの読み込みを劇的に高速化します。</p>
+                    <p>CloudFrontは、ユーザーに近い拠点からデータを送ることで、遅延を最小限に抑えます。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph LR
+                        User((User)) -- DNS:Route53 --> CF[CloudFront Edge]
+                        CF -- Cache Miss --> S3[Amazon S3 Origin]
+                        CF -- Cache Hit --> User
+                        S3 -- OAC:アクセス遮断 --> CF
+                        style CF fill:#3498db,stroke:#fff;
+                        style S3 fill:#2ecc71,stroke:#fff;
+                        style User fill:#f1c40f,stroke:#222;
+                    </div>
                 </div>
             </section>
 

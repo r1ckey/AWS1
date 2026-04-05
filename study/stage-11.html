@@ -6,6 +6,8 @@
     <title>Study: Stage 11 費用最適化 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -42,7 +44,19 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>AWSのコスト削減の王道は、将来的に使う分をあらかじめ約束する（コミット）することです。特にSavings Plansは、EC2だけでなくLambdaやFargateの利用も一括で割引対象になるため推奨されます。</p>
+                    <p>利用形態に合わせて、最もお得なプランを選択します。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph LR
+                        OD[オンデマンド: 高] -- コミット --> SP[Savings Plans: 低]
+                        OD -- 予備キャパ利用 --> Spot[Spot Instances: 極低]
+                        subgraph Discount[コスト削減効果]
+                            SP
+                            Spot
+                        end
+                        style OD fill:#e74c3c,stroke:#fff;
+                        style SP fill:#2ecc71,stroke:#fff;
+                        style Spot fill:#3498db,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

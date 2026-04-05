@@ -6,6 +6,8 @@
     <title>Study: Stage 9 サーバーレス | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -41,7 +43,17 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>Lambdaは、インフラの存在を全く意識することなくコードを実行できる画期的なサービスです。CPUやメモリの準備、OSのパッチ適用などの手間はありません。コードをアップロードすれば、高いスケーラビリティと共に実行されます。</p>
+                    <p>Lambdaは、インフラの存在を意識することなくコードを実行できるサーバーレスサービスです。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph LR
+                        User((User)) --> API[API Gateway]
+                        API --> Lambda[AWS Lambda]
+                        Lambda --> DB[(DynamoDB)]
+                        S3[S3 Bucket] -- Event --> Lambda
+                        style Lambda fill:#ff9900,stroke:#fff;
+                        style DB fill:#3498db,stroke:#fff;
+                        style API fill:#2ecc71,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

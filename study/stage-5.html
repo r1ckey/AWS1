@@ -6,6 +6,8 @@
     <title>Study: Stage 5 ALB / AutoScaling / CloudWatch | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -42,8 +44,19 @@
                 <img src="../images/ha_architecture_diagram.png" alt="High Availability Diagram" class="architecture-diagram">
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>ELB (Elastic Load Balancing) は、単一の入り口を提供し、後方に控える複数のEC2インスタンスへ負荷を分散します。これにより、トラフィックの急増や、一部のインスタンスの故障にも耐えられるシステムを構築できます。</p>
-                    <p>特に<strong>ALB (Application Load Balancer)</strong>は、リクエストの内容（例: /images/* なら画像サーバーへ）を見て振り分けることができる柔軟なバランサーです。</p>
+                    <p>ELB は、複数のEC2インスタンスへ負荷を分散し、システムの耐障害性を高めます。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph TD
+                        User((User)) --> ALB[ALB: Application Load Balancer]
+                        subgraph ASG[Auto Scaling Group]
+                            ALB --> EC2_A[EC2 Instance A]
+                            ALB --> EC2_B[EC2 Instance B]
+                        end
+                        CW[CloudWatch] -- 負荷を監視 --> ASG
+                        ASG -- 台数を増減 --> EC2_C[EC2 Instance C]
+                        style ALB fill:#ff9900,stroke:#fff;
+                        style ASG fill:#232f3e,stroke:#fff;
+                    </div>
                 </div>
             </section>
 

@@ -6,6 +6,8 @@
     <title>Study: Stage 2 EC2 | AWS Learning</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/study.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
     <header>
@@ -41,8 +43,15 @@
                 </div>
                 <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
                 <div class="details-content">
-                    <p>EC2を起動するには、まず「種本」となる<strong>AMI</strong>を選びます。AWSが提供する標準的なLinuxやWindowsのほか、マーケットプレイスで提供されているサードパーティ製品、また自分が構築し終えたサーバーを丸ごと保存したカスタムAMIも利用できます。</p>
-                    <p>AMIには、ルートボリューム（OSが入る場所）のスナップショットや、起動時のアクセス許可情報が含まれています。これにより、複雑な環境構築なしで、数分で新しいサーバーを立ち上げることが可能です。</p>
+                    <p>EC2を起動するには、まず「テンプレート」となる<strong>AMI</strong>を選び、ストレージ（EBS）を定義します。</p>
+                    <div class="mermaid" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; margin-top: 1rem;">
+                    graph LR
+                        AMI[AMI Template] -- 起動 --> EC2[EC2 Instance]
+                        EC2 -- アタッチ --> EBS[EBS Root Volume]
+                        EC2 -- 適用 --> SG[Security Group]
+                        style EC2 fill:#ff9900,stroke:#222;
+                        style AMI fill:#232f3e,stroke:#fff;
+                    </div>
                 </div>
             </section>
 
