@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 9 サーバーレス | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 9 SERVERLESS</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=9">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#lambda">Lambda (実行環境)</a></li>
+                <li><a href="#apigw">API Gateway (入り口)</a></li>
+                <li><a href="#dynamodb">DynamoDB (NoSQL)</a></li>
+                <li><a href="#async">非同期とメッセージング</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="lambda" class="section">
+                <h2>Lambda (実行環境)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>FaaS:</strong> サーバー管理なし。コードだけを書けば動く。</li>
+                        <li><strong>イベント駆動:</strong> 何かのトリガー（S3への保存、APIアクセス等）で起動。</li>
+                        <li><strong>従量課金:</strong> 実行時間（ミリ秒単位）と回数だけ課金。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>Lambdaは、インフラの存在を全く意識することなくコードを実行できる画期的なサービスです。CPUやメモリの準備、OSのパッチ適用などの手間はありません。コードをアップロードすれば、高いスケーラビリティと共に実行されます。</p>
+                </div>
+            </section>
+
+            <section id="apigw" class="section">
+                <h2>API Gateway (API 入り口)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>エンドポイント:</strong> HTTP/HTTPS を受け取り、バックエンドへ繋ぐ。</li>
+                        <li><strong>統合:</strong> Lambda、DynamoDB、HTTPプロキシなど、様々なサービスと連携。</li>
+                        <li><strong>機能:</strong> 認証、流量制限（Throttling）、SDKの生成。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>公開されるAPIの門番です。認証や監視の仕組みを一度に提供するため、個別のバックエンド（Lambda）にこれらの機能を実装する必要がありません。</p>
+                </div>
+            </section>
+
+            <section id="dynamodb" class="section">
+                <h2>DynamoDB (NoSQL データベース)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>NoSQL:</strong> スキーマレスで、キー・バリュー形式などのデータを格納。</li>
+                        <li><strong>超高速な応答:</strong> 1桁ミリ秒単位の低レイテンシー。</li>
+                        <li><strong>完全マネージド:</strong> サーバーレス。容量や負荷に応じた自動スケーリング。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>リレーショナルデータベース(RDS)と異なり、複雑なテーブル結合（JOIN）などは苦手ですが、単純な読み書きにおいては、データ量がどれだけ増えても性能が劣化しないという強力な特徴を持ちます。</p>
+                </div>
+            </section>
+
+            <section id="async" class="section">
+                <h2>非同期とメッセージング (SQS, SNS)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>SQS:</strong> メッセージを貯めておくキュー（待ち列）。</li>
+                        <li><strong>SNS:</strong> メッセージを複数の受信者に一斉配信（プッシュ）。</li>
+                        <li><strong>疎結合:</strong> システム同士を直接繋がず、障害の影響を限定する設計。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>サーバーレス構成においては、「システム同士を直接繋がない（疎結合）」ことが、堅牢なシステムを作るためのコツです。SQSを使用すれば、後方の処理が遅れていてもデータが失われることはありません。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>サーバーレスの時代！</h4>
+                    <p>次は、リージョンを跨いだ複雑な接続などを扱う「高度なネットワーク」の世界へ進みましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=9" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(9, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(9);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

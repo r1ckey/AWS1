@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 5 ALB / AutoScaling / CloudWatch | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 5 SCALING & MONITORING</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=5">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#elb">ロードバランサー (ELB)</a></li>
+                <li><a href="#asg">オートスケーリング (ASG)</a></li>
+                <li><a href="#cloudwatch">CloudWatch 監視</a></li>
+                <li><a href="#sns">通知 (SNS)</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="elb" class="section">
+                <h2>ロードバランサー (ELB)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>ALB:</strong> HTTP/HTTPS (L7) 用。パスベースルーティング等。</li>
+                        <li><strong>NLB:</strong> TCP/UDP (L4) 用。超高速・低遅延。固定IP(EIP)利用。</li>
+                        <li><strong>ヘルスチェック:</strong> 異常なインスタンスを自動で切り離す機能。</li>
+                    </ul>
+                </div>
+                <img src="../images/ha_architecture_diagram.png" alt="High Availability Diagram" class="architecture-diagram">
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>ELB (Elastic Load Balancing) は、単一の入り口を提供し、後方に控える複数のEC2インスタンスへ負荷を分散します。これにより、トラフィックの急増や、一部のインスタンスの故障にも耐えられるシステムを構築できます。</p>
+                    <p>特に<strong>ALB (Application Load Balancer)</strong>は、リクエストの内容（例: /images/* なら画像サーバーへ）を見て振り分けることができる柔軟なバランサーです。</p>
+                </div>
+            </section>
+
+            <section id="asg" class="section">
+                <h2>オートスケーリング (ASG)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>希望容量:</strong> 維持したいインスタンスの台数。</li>
+                        <li><strong>スケーリングポリシー:</strong> 負荷に応じて自動増減するルール。</li>
+                        <li><strong>自己修復:</strong> 異常なインスタンスを自動で入れ替える。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>Auto Scalingは、サーバーの台数を動的に増減させる仕組みです。アクセスが増えた際に自動的にサーバーを「追加」し、負荷が下がれば「削除」することで、コストを最適化します。</p>
+                    <ul>
+                        <li><strong>起動テンプレート:</strong> どのようなサーバー（AMI, タイプ等）を起動するかを定義。</li>
+                        <li><strong>ターゲット追跡ポリシー:</strong> 「平均CPU使用率を50%に保つ」などの指示に従い、自動で計算して増減させます。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="cloudwatch" class="section">
+                <h2>CloudWatch 監視</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>メトリクス:</strong> CPU、NW、ディスク使用率などの数値データ。</li>
+                        <li><strong>アラーム:</strong> 数値が閾値を超えた時にアクションを実行。</li>
+                        <li><strong>ログ:</strong> サービスやEC2内のログを集中管理。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>CloudWatchは「AWSの目」です。何か異常があったとき（CPUが100%に張り付いた、EC2が死んだ、など）を検知し、自動復旧や管理通報の中心的なハブとなります。</p>
+                    <ul>
+                        <li><strong>ダッシュボード:</strong> サーバーの状態を一つの画面にまとめてグラフ表示できます。</li>
+                        <li><strong>Logs Insights:</strong> 何万行もあるログからエラーの推移を瞬時に検索できます。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="sns" class="section">
+                <h2>通知 (SNS)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>トピック:</strong> メッセージの配信先となるグループ。</li>
+                        <li><strong>サブスクライブ:</strong> メール、Slack、Lambdaなど、通知の受取形式。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p><strong>Amazon SNS (Simple Notification Service)</strong>は、メッセージ配信サービスです。CloudWatchアラームと連動させることで、深刻なエラーが発生した瞬間に管理者に通知を飛ばすといった「自動通報」の仕組みが完成します。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>高可用性設計をマスター！</h4>
+                    <p>次は、データを保存・配信する「S3 / CloudFront / Route 53」へ進みましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=5" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(5, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(5);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

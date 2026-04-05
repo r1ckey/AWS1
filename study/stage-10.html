@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 10 高度なネットワーク | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 10 ADVANCED NETWORKING</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=10">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#endpoint">VPC エンドポイント</a></li>
+                <li><a href="#dx">DX と VPN</a></li>
+                <li><a href="#tgw">Transit Gateway</a></li>
+                <li><a href="#accelerator">Global Accelerator</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="endpoint" class="section">
+                <h2>VPC エンドポイント (PrivateLink)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>目的:</strong> インターネットを経由せずに、VPC内からAWSサービスへ直接アクセス。</li>
+                        <li><strong>Interface:</strong> ほとんどのAWSサービス（ENI経由）。</li>
+                        <li><strong>Gateway:</strong> S3 と DynamoDB のみ。ルートテーブルで制御。無料。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>プライベートサブネットにあるEC2からS3にアクセスする場合、通常はNAT GWが必要ですが、VPCエンドポイントを使用すれば、AWS内部ネットワークだけで完結できます。これにより、セキュリティと転送効率の両方が向上します。</p>
+                </div>
+            </section>
+
+            <section id="dx" class="section">
+                <h2>Direct Connect (DX) と VPN</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>VPN:</strong> インターネット越しの暗号化接続。安価、即時導入。</li>
+                        <li><strong>DX:</strong> 専用の物理線。安定した高帯域（1G/10G/100G）。高価。</li>
+                        <li><strong>用途:</strong> オンプレミスとのハイブリッドクラウド構築。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>オフィスからAWSへ接続する際の主な手段です。重要な業務データは、インターネットに晒されないDirect Connectを使用することが一般的です。</p>
+                </div>
+            </section>
+
+            <section id="tgw" class="section">
+                <h2>Transit Gateway (TGW)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>ハブ接続:</strong> 多数のVPCやオンプレを中央集中的に繋ぐ。</li>
+                        <li><strong>簡素化:</strong> VPCピア接続の網目状の管理を、スター型ネットワークに置き換える。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>VPCが増えるにつれて、それらを相互に繋ぐのは大変になります。Transit Gatewayを使えば、全てのネットワークを一つの大きなハブに繋ぐだけで、ルーティングを整理できます。</p>
+                </div>
+            </section>
+
+            <section id="accelerator" class="section">
+                <h2>Global Accelerator (GA)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>高速化:</strong> AWSのグローバルネットワークを使い、各国の入り口からパケットを高速転送。</li>
+                        <li><strong>固定IP:</strong> 変化しない2つのエニーキャストIPアドレスをエンドユーザーに提供（DNS浸透待ちを回避可能）。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>世界中のユーザーに対して、最短距離のネットワークを提供します。障害発生時には数秒で別のリージョンへトラフィックを切り替えることが可能です。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>ネットワークの極限を習得！</h4>
+                    <p>次は、お財布事情に直結する「費用最適化」の重要トピックへ進みましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=10" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(10, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(10);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

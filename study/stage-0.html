@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 0 基礎知識 | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 0 STUDY</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=0">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#cloud">クラウドとは</a></li>
+                <li><a href="#models">サービスモデル</a></li>
+                <li><a href="#infra">インフラ構成</a></li>
+                <li><a href="#shared">責任共有モデル</a></li>
+                <li><a href="#iam">IAMの基本</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="cloud" class="section">
+                <h2>クラウドコンピューティングとは</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li>ITリソースをインターネット経由でオンデマンド提供</li>
+                        <li>従量課金制（使った分だけ支払う）</li>
+                        <li>6つの長所（コスト変換、スケール、俊敏性など）</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>クラウドコンピューティングは、自前でサーバーを購入・管理する代わりに、プロバイダーが保有する強力なコンピューティングリソースを「必要な時に」「必要な分だけ」レンタルする仕組みです。</p>
+                    <p><strong>AWSが定義する6つの長所:</strong></p>
+                    <ul>
+                        <li>固定費を変動費に変換（先行投資をなくす）</li>
+                        <li>規模による経済（低料金の実現）</li>
+                        <li>キャパシティ予測の不要化（自動スケーリング）</li>
+                        <li>スピードと俊敏性の向上</li>
+                        <li>差別化につながらない重労働（ラックや電源管理）の削減</li>
+                        <li>短時間でのグローバル展開（数クリックで世界へ）</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="models" class="section">
+                <h2>クラウドのサービスモデル</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>IaaS:</strong> インフラ（サーバー、NW）のみ提供</li>
+                        <li><strong>PaaS:</strong> 開発実行環境まで提供（OS管理不要）</li>
+                        <li><strong>SaaS:</strong> アプリケーションそのものを提供</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>利用目的によって、管理の責任分担が変わります。</p>
+                    <ul>
+                        <li><strong>IaaS (EC2など):</strong> 最も柔軟性が高い。OSやミドルウェアの管理が必要。</li>
+                        <li><strong>PaaS (Beanstalk, lambdaなど):</strong> 開発に集中。OSパッチ適用などはAWS側が実施。</li>
+                        <li><strong>SaaS (Workspaceなど):</strong> ソフトウェアとして即利用。設定のみ変更可能。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="infra" class="section">
+                <h2>AWS グローバルインフラストラクチャ</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>リージョン:</strong> 地理的に離れた拠点（東京、オレゴン等）</li>
+                        <li><strong>AZ:</strong> 1つ以上のデータセンター群（高可用性）</li>
+                        <li><strong>エッジロケーション:</strong> 低遅延配信用拠点（CDN用）</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>AWSは世界中に拠点を展開しており、これらを活用して「高可用性（壊れにくい）」と「低遅延（速い）」を実現します。</p>
+                    <ul>
+                        <li>リージョンは、完全に独立した地理的エリアです。コンプライアンスやコスト、遅延に基づいて選択します。</li>
+                        <li>各リージョンには、複数のアベイラビリティーゾーン（AZ）が含まれます。AZ間は高速・低遅延な専用NWで接続されており、マルチAZ設計により、1つのAZがダウンしてもサービスを継続できます。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="shared" class="section">
+                <h2>責任共有モデル</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>AWSの責任:</strong> クラウド自体のセキュリティ（インフラ、物理）</li>
+                        <li><strong>お客様の責任:</strong> クラウド内のセキュリティ（データ、OS構成、暗号化）</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>「お客様がすべてを管理する必要はない」というクラウドの核心概念です。物理的なサーバーラックや電源、仮想化レイヤーはAWSが責任を持ちます。一方で、サーバーにインストールしたOSの設定や、保存したデータの暗号化、アクセス権の管理などは、利用者が責任を持って行う必要があります。</p>
+                </div>
+            </section>
+
+            <section id="iam" class="section">
+                <h2>IAM (Identity and Access Management)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>最小権限の原則:</strong> 必要な権限のみ付与</li>
+                        <li><strong>認証方式:</strong> ID/PW, アクセスキー, 多要素認証(MFA)</li>
+                        <li><strong>リソース:</strong> ユーザー, グループ, ロール, ポリシー</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>誰が（認証）、何に対して（認可）、どのような操作ができるかを管理します。ルートユーザー（最強権限）はアカウント作成後の初期設定のみに使用し、日常業務にはIAMユーザーやロールを使用することが強く推奨されます。MFA（多要素認証）の有効化は、セキュリティ上の最優先事項です。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>学習お疲れ様でした！</h4>
+                    <p>知識が定着しているか、クイズで確認してみましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=0" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        // Accordion Logic
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(0, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        // Initialize state
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(0);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

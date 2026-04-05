@@ -1,0 +1,222 @@
+[
+    {
+        "text": "AWS Certificate Manager (ACM) の主な役割は何ですか？",
+        "options": [
+            "ユーザーのパスワードを保存する",
+            "SSL/TLS 証明書のプロビジョニング、管理、デプロイを行う",
+            "ネットワークの入り口をファイアウォールで守る",
+            "物理サーバの鍵を管理する"
+        ],
+        "answer": 1,
+        "explanation": "ACMを使用することで、ELBやCloudFrontなどで使用するSSL/TLS証明書を簡単に発行・更新でき、HTTPS通信を実現できます。"
+    },
+    {
+        "text": "SQLインジェクションやクロスサイトスクリプティング (XSS) などの一般的なWeb攻撃からWebアプリケーションを保護するサービスはどれですか？",
+        "options": [
+            "AWS Shield",
+            "AWS WAF",
+            "Amazon Inspector",
+            "Amazon Macie"
+        ],
+        "answer": 1,
+        "explanation": "WAF（Web Application Firewall）は、アプリケーション層（L7）でリクエストを検査し、悪意のある通信を遮断します。"
+    },
+    {
+        "text": "すべてのAWSアカウントで追加料金なしで自動的に有効化される、基本的なDDoS攻撃（L3/L4）からの保護サービスはどれですか？",
+        "options": [
+            "AWS Shield Standard",
+            "AWS Shield Advanced",
+            "AWS WAF",
+            "Amazon CloudWatch"
+        ],
+        "answer": 0,
+        "explanation": "Shield StandardはすべてのAWSユーザーに提供される標準のDDoS防御機能です。より高度な防御とサポートが必要ならAdvancedを検討します。"
+    },
+    {
+        "text": "データの暗号化に使用される暗号化キーを安全に作成・管理するためのマネージドサービスはどれですか？",
+        "options": [
+            "AWS Secrets Manager",
+            "AWS KMS (Key Management Service)",
+            "AWS CloudTrail",
+            "Amazon Macie"
+        ],
+        "answer": 1,
+        "explanation": "KMSを使用すると、AWS全体で共有される暗号化キーを一元管理し、データの機密性を確保できます。"
+    },
+    {
+        "text": "AWSアカウント内で行われたAPI操作（誰が、いつ、どこから、何を）を記録し、監査やトラブルシューティングに役立てるサービスはどれですか？",
+        "options": [
+            "Amazon CloudWatch",
+            "AWS CloudTrail",
+            "AWS Config",
+            "Amazon Inspector"
+        ],
+        "answer": 1,
+        "explanation": "CloudTrailは、アカウント内の操作履歴をイベントとして記録し、ガバナンスとコンプライアンスを強化します。"
+    },
+    {
+        "text": "S3バケット等に保存された、個人情報 (PII) などの機密データを機械学習を用いて自動的に検出・保護するサービスはどれですか？",
+        "options": [
+            "Amazon GuardDuty",
+            "Amazon Macie",
+            "Amazon Inspector",
+            "AWS Shield"
+        ],
+        "answer": 1,
+        "explanation": "Macieは、S3内のデータの機密性を把握し、意図しない公開や漏洩を防ぐためのインテリジェントなデータプライバシーサービスです。"
+    },
+    {
+        "text": "Amazon EC2 インスタンスやコンテナイメージの脆弱性、およびネットワークの露出を自動的にスキャンして評価するサービスはどれですか？",
+        "options": [
+            "Amazon Inspector",
+            "Amazon GuardDuty",
+            "AWS Trusted Advisor",
+            "AWS WAF"
+        ],
+        "answer": 0,
+        "explanation": "Inspectorは、定期的にインフラストラクチャをスキャンし、既知の脆弱性やセキュリティ上の問題点を指摘します。"
+    },
+    {
+        "text": "AWS CloudHSM と KMS の主な違いは何ですか？",
+        "options": [
+            "CloudHSMの方が安い",
+            "CloudHSMは専用のハードウェアセキュリティモジュールを専有し、より厳格なコンプライアンス要件に対応する",
+            "KMSは物理サーバである",
+            "違いはない"
+        ],
+        "answer": 1,
+        "explanation": "KMSはマルチテナントですが、CloudHSMはお客様がハードウェアを独占し、FIPS 140-2 Level 3準拠の厳格な管理が可能です。"
+    },
+    {
+        "text": "不審なアクティビティや悪意のある操作（例: ブルートフォース攻撃、マイニングへの流用）を継続的にモニタリングし、脅威を検知するサービスはどれですか？",
+        "options": [
+            "Amazon Detective",
+            "Amazon GuardDuty",
+            "AWS WAF",
+            "AWS Secrets Manager"
+        ],
+        "answer": 1,
+        "explanation": "GuardDutyは、各種ログ（CloudTrail, VPC Flow Logs, DNS等）をインテリジェントに分析し、脅威を自動検知します。"
+    },
+    {
+        "text": "秘密情報（データベースのパスワードやAPIキーなど）を安全に保存し、自動的にローテーション（更新）させる機能を備えたサービスはどれですか？",
+        "options": [
+            "AWS KMS",
+            "AWS Secrets Manager",
+            "AWS Artifact",
+            "Amazon Macie"
+        ],
+        "answer": 1,
+        "explanation": "Secrets Managerは、ハードコードを避け、動的に秘密情報を取得・更新するために非常に役立つサービスです。"
+    },
+    {
+        "text": "AWS Artifact の主な役割は何ですか？",
+        "options": [
+            "ソフトウェアのビルドを行う",
+            "AWSのコンプライアンスレポート（ISO, SOC, PCI等）をダウンロードし、オンデマンドで確認する",
+            "3Dモデルを作成する",
+            "物理的な書類を郵送する"
+        ],
+        "answer": 1,
+        "explanation": "Artifactは、AWSのセキュリティおよび規制への準拠状況を証明する文書を取得するためのポータルサイトです。"
+    },
+    {
+        "text": "AWSにおいて「エンベロープ暗号化」とは何を意味しますか？",
+        "options": [
+            "データを封筒(Envelope)に入れて郵送すること",
+            "データを暗号化するためのデータキー(DEK)を、さらに別のマスターキー(KMS)で暗号化して管理する手法",
+            "パスワードを何重にもかけること",
+            "物理的な暗号化デバイスのこと"
+        ],
+        "answer": 1,
+        "explanation": "マスターキーを安全に保ちつつ、大量のデータを高速に暗号化するための標準的な手法です。"
+    },
+    {
+        "text": "WAF で適用できる「マネージドルール」とはどのようなものですか？",
+        "options": [
+            "自分で一から手書きするルール",
+            "AWSやサードパーティ（マーケットプレイス）が作成・更新する、既知の脆弱性やIPリストに対応したプリセットルール",
+            "自動的に削除されるルール",
+            "物理サーバに適用されるルール"
+        ],
+        "answer": 1,
+        "explanation": "自らルールを研究しなくても、最新の脅威に対する防御を簡単に導入できます。"
+    },
+    {
+        "text": "セキュリティ事故の根本原因を調査するために、GuardDutyで検知された情報を深掘り分析し、関連性を可視化するサービスはどれですか？",
+        "options": [
+            "Amazon GuardDuty",
+            "Amazon Detective",
+            "AWS Config",
+            "CloudWatch Logs"
+        ],
+        "answer": 1,
+        "explanation": "Detectiveは、複雑なセキュリティイベントの背後にある「なぜ、どのように起こったか」という相関関係をグラフィカルに表示します。"
+    },
+    {
+        "text": "AWS Security Hub の主な目的は何ですか？",
+        "options": [
+            "物理的な警備員を配置する",
+            "AWSの各種セキュリティサービスの警告を統合管理し、セキュリティ基準への準拠状況を中央で確認する",
+            "パスワードを一括変更する",
+            "AWSの料金を安くする"
+        ],
+        "answer": 1,
+        "explanation": "複数のアカウントやリージョンのセキュリティステータスを一つの画面にまとめて表示する「セキュリティのハブ」です。"
+    },
+    {
+        "text": "「データの暗号化」の責任共有モデルにおいて、一般的に「データの暗号化」自体の責任は誰にありますか？",
+        "options": [
+            "AWS",
+            "お客様",
+            "OSのメーカー",
+            "ISP（インターネット接続事業者）"
+        ],
+        "answer": 1,
+        "explanation": "AWSはKMSなどのツールを提供しますが、実際に暗号化を有効にし、キーをどう管理するかはお客様の責任です。"
+    },
+    {
+        "text": "AWS Certificate Manager (ACM) で発行された証明書を更新する際の手間はどうなりますか？",
+        "options": [
+            "毎年、手動で購入手続きをやり直す必要がある",
+            "ACMがサポートするサービス（ELBやCloudFront）で使用されている場合、自動更新（マネージド更新）が提供される",
+            "更新のたびにサーバを再起動する必要がある",
+            "更新はできない"
+        ],
+        "answer": 1,
+        "explanation": "ACM最大の利点の一つは、有効期限の管理と更新が自動化されるため、更新忘れによる事故を防げる点にあります。"
+    },
+    {
+        "text": "特定のIAMユーザーが、いつどのIPアドレスから特定のファイルを削除したかを確認するために見るべきログはどれですか？",
+        "options": [
+            "VPC Flow Logs",
+            "CloudTrail ログ",
+            "CloudWatch アラーム",
+            "AWS Config タイムライン"
+        ],
+        "answer": 1,
+        "explanation": "CloudTrailには「誰が (Who)」「いつ (When)」「何を (What)」したかの詳細なAPI履歴が記録されています。"
+    },
+    {
+        "text": "CloudTrail ログが外部の第三者によって改ざんされていないことを証明する機能は何ですか？",
+        "options": [
+            "ログのバックアップ",
+            "ログファイルの整合性検証 (Log File Integrity Validation)",
+            "パスワード保護",
+            "ログの非公開化"
+        ],
+        "answer": 1,
+        "explanation": "デジタル署名を利用して、記録後にログが編集されていないことを暗号学的に証明できます。"
+    },
+    {
+        "text": "AWS WAF をアタッチできるリソース（リソースタイプ）として正しい組み合わせはどれですか？",
+        "options": [
+            "ALB, CloudFront, API Gateway, AppSync",
+            "EC2, S3, RDS",
+            "VPC, Subnet, Route 53",
+            "物理サーバ"
+        ],
+        "answer": 0,
+        "explanation": "WAFは、HTTP(S)トラフィックの入り口となる特定。現代的なWebアプリケーションの配信ポイントに統合されます。"
+    }
+]

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 3 IAM | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 3 IAM</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=3">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#identity">IAMリソースの種類</a></li>
+                <li><a href="#policy">IAMポリシー</a></li>
+                <li><a href="#role">IAMロール</a></li>
+                <li><a href="#bestpractice">セキュリティのベストプラクティス</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="identity" class="section">
+                <h2>IAMリソースの種類</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>IAMユーザー:</strong> 個別の人間やアプリケーション（認証用）</li>
+                        <li><strong>IAMグループ:</strong> 複数のユーザーを一括管理する単位</li>
+                        <li><strong>ルートユーザー:</strong> 全権限を持つ初期ユーザー。日常的には使用しない</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>管理を簡単にするために、通常は「グループ（例: Admins、Developers）」を作成し、そこにユーザーを追加します。権限をグループ単位で付与することで、異動や退職時の権限管理ミスを大幅に減らせます。</p>
+                </div>
+            </section>
+
+            <section id="policy" class="section">
+                <h2>IAMポリシー (認可)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>認可:</strong> 「何ができるか」をJSON形式で記述</li>
+                        <li><strong>Effect:</strong> Allow（許可）または Deny（拒否）</li>
+                        <li><strong>Resource:</strong> 対象となるAWSサービスのリソース（ARN）</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>ポリシーには「管理ポリシー（AWSが用意したもの）」と「カスタマー管理ポリシー」があります。JSON形式で「S3の読み込みだけ許可する」といった細かいルールを記述します。AWSでは「明示的な拒否（Deny）」が最も優先されます。</p>
+                </div>
+            </section>
+
+            <section id="role" class="section">
+                <h2>IAMロール</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>一時的な権限:</strong> ID/パスワードを持たず、特定の条件で「引き受ける」</li>
+                        <li><strong>主な用途:</strong> EC2などのサービスに権限を付与、または第三者アカウントの利用</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>EC2上で動くアプリがS3にアクセスする場合、アプリコードにID/PWを埋め込むのは危険です。そこで、EC2に適切な<strong>IAMロール</strong>を付与します。これにより、インスタンスが安全に権限を「引き受ける」ことができます。</p>
+                </div>
+            </section>
+
+            <section id="bestpractice" class="section">
+                <h2>セキュリティのベストプラクティス</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>最小権限の原則:</strong> 本当に必要な権限だけを与える</li>
+                        <li><strong>MFAの有効化:</strong> 二要素認証（特にルートユーザーは必須）</li>
+                        <li><strong>アクセスキーの管理:</strong> 定期的なローテーションを行い、GitHubなどに流出させない</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>最も重要なのは、最初のアカウント作成時に作られる「ルートユーザー」を守ることです。日常作業はIAMユーザーで行い、ルートユーザーには強力な物理トークン（MFA）を適用して、金庫に鍵をかけるように管理する必要があります。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>セキュリティ第一！</h4>
+                    <p>権限管理ができたら、次はデータを保存する強固な「データベース（RDS）」に進みましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=3" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(3, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(3);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

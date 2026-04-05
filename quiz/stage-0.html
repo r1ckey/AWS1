@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Stage 0 基礎知識 | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 0 QUIZ</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../study/stage-0.html">学習に戻る</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="quiz-container" class="quiz-container">
+            <div class="quiz-header">
+                <div class="quiz-progress-bar">
+                    <div id="quiz-progress"></div>
+                </div>
+                <div id="quiz-counter" style="font-size: 0.8rem; color: var(--aws-text-muted);">
+                    Question <span id="current-q">1</span> / 20
+                </div>
+            </div>
+
+            <div id="question" class="question-text">読み込み中...</div>
+            
+            <div id="options" class="options-container">
+                <!-- Options will be injected here -->
+            </div>
+
+            <div id="feedback" class="feedback-area">
+                <!-- Feedback will be injected here -->
+            </div>
+
+            <button id="next-btn" class="btn btn-primary" style="display: none;" onclick="quiz.nextQuestion()">次の問題へ</button>
+        </div>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script src="../js/quiz-engine.js"></script>
+    <script>
+        const quiz = new QuizEngine(0, '../data/questions-stage0.json');
+        
+        // Override updateUI to show counter
+        const originalUpdateUI = quiz.updateUI;
+        quiz.updateUI = function() {
+            originalUpdateUI.call(this);
+            document.getElementById('current-q').textContent = this.currentIndex + 1;
+        };
+
+        quiz.init();
+    </script>
+</body>
+</html>

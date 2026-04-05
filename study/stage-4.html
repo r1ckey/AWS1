@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 4 RDS / Aurora | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 4 DATABASE</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=4">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#rds">RDSの基本</a></li>
+                <li><a href="#multiaz">高可用性 (Multi-AZ)</a></li>
+                <li><a href="#aurora">Amazon Aurora</a></li>
+                <li><a href="#replica">リードレプリカ</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="rds" class="section">
+                <h2>RDS (Relational Database Service) の基本</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>マネージドサービス:</strong> OSレベルのパッチ、バックアップをAWSが代行</li>
+                        <li><strong>対応エンジン:</strong> MySQL, PostgreSQL, MariaDB, Oracle, SQL Server</li>
+                        <li><strong>バックアップ:</strong> 自動バックアップ機能により任意の時点に復元可能</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>RDSは、セットアップ、運用、スケールを簡単に行えるリレーショナルデータベースのマネージドサービスです。EC2上に自前でDBを構築する場合と異なり、OSの管理やミドルウェアのセットアップをAWSに任せられるため、開発者はアプリ開発に集中できます。</p>
+                </div>
+            </section>
+
+            <section id="multiaz" class="section">
+                <h2>高可用性 (Multi-AZ)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>配置:</strong> 異なるAZ（可用性ゾーン）にスタンバイ機を配置</li>
+                        <li><strong>フェイルオーバー:</strong> プライマリが故障した際、自動で切り替わる</li>
+                        <li><strong>同期複製:</strong> データは常に両方のAZに書き込まれる</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>ミッションクリティカルなシステムでは、Multi-AZ構成が必須です。プライマリDBがダウンした場合でも、DNSの書き換えにより数分以内で自動的にスタンバイDBが昇格し、エンドユーザーへの影響を最小限に抑えます。これはあくまで「高可用性」のための機能であり、パフォーマンス向上用ではありません。</p>
+                </div>
+            </section>
+
+            <section id="aurora" class="section">
+                <h2>Amazon Aurora</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>AWS設計:</strong> クラウドネイティブな超高性能データベースエンジン</li>
+                        <li><strong>高速・堅牢:</strong> MySQLの5倍、PostgreSQLの3倍のパフォーマンス</li>
+                        <li><strong>データ分散:</strong> 3つのAZに計6つのコピーを保存する特殊ストレージ</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>Auroraは、AWSがクラウド向けにゼロから設計し直した、可用性とパフォーマンスに特化したエンジンです。最大15個のリードレプリカを作成可能で、大規模なトラフィックにも対応できます。ストレージは自動で拡張され、管理の手間が大幅に軽減されます。</p>
+                </div>
+            </section>
+
+            <section id="replica" class="section">
+                <h2>リードレプリカ</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>目的:</strong> 読み取り負荷の分散によるパフォーマンス向上</li>
+                        <li><strong>方式:</strong> 非同期複製（プライマリからデータをコピー）</li>
+                        <li><strong>範囲:</strong> リージョンを跨いだ配置（クロスリージョン）も可能</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>ウェブサイトの閲覧など、参照系のリクエストが多い場合に、読み取り専用の複製（リードレプリカ）を作成してメインDBの負荷を逃がす手法です。Multi-AZと違い、データのコピーは「非同期」で行われるため、わずかなラグが生じる可能性がある点に注意が必要です。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>データ管理をマスター！</h4>
+                    <p>DBの次は、システムの可用性を高める「ロードバランサー (ALB)」を学びましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=4" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(4, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(4);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

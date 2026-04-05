@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study: Stage 8 コンテナ / CI/CD | AWS Learning</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/study.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="../index.html">AWS Learning</a> <span>STAGE 8 DEVOPS & CONTAINERS</span></div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">ロードマップ</a></li>
+                <li><a href="../quiz/page.html?stage=8">クイズに挑戦</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="study-layout">
+        <aside class="sidebar">
+            <h3>目次</h3>
+            <ul>
+                <li><a href="#containers">コンテナ (ECS / Fargate)</a></li>
+                <li><a href="#ecr">ECR (イメージ管理)</a></li>
+                <li><a href="#cicd">CI/CD パイプライン</a></li>
+                <li><a href="#iac">IaC (CloudFormation)</a></li>
+            </ul>
+        </aside>
+
+        <article class="article-content">
+            <section id="containers" class="section">
+                <h2>コンテナ (ECS / Fargate)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>ECS:</strong> 高いスケーラビリティとパフォーマンスを持つコンテナ管理。</li>
+                        <li><strong>Fargate:</strong> サーバーレスなコンテナ実行環境。サーバー管理が一切不要。</li>
+                        <li><strong>タスク定義:</strong> コンテナ（メモリ、CPU、ポート等）の設計図。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>DockerコンテナをAWS上で動かすための中心的なサービスです。EC2インスタンスを並べてその上で動かす方法（ECS on EC2）と、実行に必要なリソースだけをAWSから借りるサーバーレスな方法（Fargate）があります。現在、多くの企業が運用負荷の低いFargateを採用しています。</p>
+                </div>
+            </section>
+
+            <section id="ecr" class="section">
+                <h2>ECR (Elastic Container Registry)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>Registry:</strong> Dockerイメージの保存・管理・共有を行う場所。</li>
+                        <li><strong>脆弱性診断:</strong> 保存したイメージに脆弱性がないかスキャン可能。</li>
+                        <li><strong>統合:</strong> IAMでアクセスを制限。ECSへのデプロイ元。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>開発したコンテナをパッケージ化（イメージ化）して、安全に保管する場所です。AWSのプライベートなDocker Hubだと考えると分かりやすいでしょう。</p>
+                </div>
+            </section>
+
+            <section id="cicd" class="section">
+                <h2>CI/CD パイプライン (Codeファミリー)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>CodeCommit:</strong> ソースコード管理（Gitレポジトリ）。</li>
+                        <li><strong>CodeBuild:</strong> ビルドとテストの自動実行。サーバーレス。</li>
+                        <li><strong>CodeDeploy:</strong> サーバーやサーバーレス環境への自動デプロイ。</li>
+                        <li><strong>CodePipeline:</strong> これらを繋ぎ、一連の流れを自動化。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>「コードを書く」「テストする」「配備（デプロイ）する」という一連の作業（DevOps）を完全に自動化します。これにより、開発者は「Pushするだけ」で、最新のコードがシステムに反映される仕組みを作れます。</p>
+                </div>
+            </section>
+
+            <section id="iac" class="section">
+                <h2>IaC (Infrastructure as Code)</h2>
+                <div class="summary-card">
+                    <ul>
+                        <li><strong>CloudFormation:</strong> テンプレート（YAML/JSON）でインフラを定義。</li>
+                        <li><strong>再現性:</strong> 何度でも、誰でも、寸分違わず同じ構成を複製可能。</li>
+                        <li><strong>ドリフト検出:</strong> 手動で行った変更（差分）を検知可能。</li>
+                    </ul>
+                </div>
+                <button class="details-toggle"><span>詳細を解説</span> ⌄</button>
+                <div class="details-content">
+                    <p>インフラを「プログラムコード」として扱う考え方です。CloudFormationを使用すれば、VPCからEC2、RDSまでのセットアップを1つのファイルで完結させ、使い回すことができます。</p>
+                </div>
+            </section>
+
+            <div class="next-steps">
+                <div>
+                    <h4>DevOpsの基礎を習得！</h4>
+                    <p>次は、サーバーの概念すら消え去る「サーバーレス (Lambda / DynamoDB)」の世界へ進みましょう。</p>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button id="complete-btn" class="btn btn-outline" onclick="completeStudy()">学習完了にする</button>
+                    <a href="../quiz/page.html?stage=8" class="btn btn-primary">クイズへ挑戦</a>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <script src="../js/progress.js"></script>
+    <script>
+        document.querySelectorAll('.details-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const span = button.querySelector('span');
+                content.classList.toggle('open');
+                span.textContent = content.classList.contains('open') ? '解説を閉じる' : '詳細を解説';
+            });
+        });
+
+        function completeStudy() {
+            ProgressManager.updateStage(8, { studyCompleted: true });
+            const btn = document.getElementById('complete-btn');
+            btn.textContent = '✅ 学習完了済み';
+            btn.classList.add('btn-success');
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const progress = ProgressManager.getStageProgress(8);
+            if (progress.studyCompleted) {
+                const btn = document.getElementById('complete-btn');
+                btn.textContent = '✅ 学習完了済み';
+                btn.disabled = true;
+                btn.classList.add('btn-success');
+            }
+        });
+    </script>
+</body>
+</html>

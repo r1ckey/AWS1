@@ -1,0 +1,222 @@
+[
+    {
+        "text": "Amazon ECS (Elastic Container Service) の主な役割は何ですか？",
+        "options": [
+            "物理的なサーバを組み立てる",
+            "Dockerコンテナを効率的に実行、停止、管理するためのコンテナオーケストレーションサービス",
+            "パスワードを保存する",
+            "ネットワークの入り口をファイアウォールで守る"
+        ],
+        "answer": 1,
+        "explanation": "ECSは、複数のコンテナをクラスター内で管理し、スケーリングや可用性を担うサービスです。"
+    },
+    {
+        "text": "AWS Fargate を使用する最大のメリットは何ですか？",
+        "options": [
+            "物理サーバを自分で管理できる",
+            "EC2インスタンスのプロビジョニングや管理が不要な、サーバーレスのコンテナ実行環境を提供すること",
+            "料金が完全に無料になる",
+            "ネットワーク速度が常に固定される"
+        ],
+        "answer": 1,
+        "explanation": "Fargateでは、コンテナ単位でリソースを指定するだけで、背後のEC2管理をAWSがすべて行います。"
+    },
+    {
+        "text": "Dockerイメージを保存し、管理するためのマネージド型コンテナレジストリサービスはどれですか？",
+        "options": [
+            "Amazon ECR (Elastic Container Registry)",
+            "Amazon S3",
+            "Amazon EBS",
+            "AWS CodeCommit"
+        ],
+        "answer": 0,
+        "explanation": "ECRは、独自のコンテナイメージを非公開または公開で保存し、ECS等から簡単に引き出せるようにします。"
+    },
+    {
+        "text": "ECSにおいて、コンテナの実行単位（1つ以上のコンテナの組み合わせ設定）を定義するものを何と呼びますか？",
+        "options": [
+            "サービス (Service)",
+            "タスク定義 (Task Definition)",
+            "クラスター (Cluster)",
+            "リポジトリ (Repository)"
+        ],
+        "answer": 1,
+        "explanation": "JSON形式の「タスク定義」で、使用するイメージ、メモリ、CPU、ポートなどを指定します。"
+    },
+    {
+        "text": "ECSにおいて、指定した数の「タスク」を継続的に稼働させ、死活監視やスケーリングを行う仕組みを何と呼びますか？",
+        "options": [
+            "タスク定義",
+            "サービス (Service)",
+            "クラスター",
+            "エージェント"
+        ],
+        "answer": 1,
+        "explanation": "サービスは、タスクが落ちたら再起動し、希望する台数を維持する役割を担います。"
+    },
+    {
+        "text": "AWS CodePipeline の役割は何ですか？",
+        "options": [
+            "コードをコンパイルする",
+            "ソフトウェアのリリースのために必要なステップを自動化するフルマネージドな継続的デリバリーサービス (CD)",
+            "物理的なパイプラインを敷設する",
+            "データベースをバックアップする"
+        ],
+        "answer": 1,
+        "explanation": "ソースコードの取得、ビルド、テスト、デプロイという一連のフローをまとめ、自動化します。"
+    },
+    {
+        "text": "ソースコードをビルドし、テストを実行して、デプロイ可能な成果物（アーティファクト）を作成するサービスはどれですか？",
+        "options": [
+            "AWS CodeCommit",
+            "AWS CodeBuild",
+            "AWS CodeDeploy",
+            "AWS CodePipeline"
+        ],
+        "answer": 1,
+        "explanation": "CodeBuildは、サーバーの構築や管理なしに、コードをコンパイルしてパッケージングします。"
+    },
+    {
+        "text": "CodeBuild で、ビルドの手順や環境変数を定義するためにソースコードに含めるファイル名はどれですか？",
+        "options": [
+            "appspec.yml",
+            "buildspec.yml",
+            "dockerfile",
+            "jenkinsfile"
+        ],
+        "answer": 1,
+        "explanation": "YAML形式のbuildspec.ymlファイルで、ビルドの前中後に行うコマンドを記述します。"
+    },
+    {
+        "text": "EC2やECS、Lambdaなどの各種リソースへのアプリケーションの配信（デプロイ）を自動化するサービスはどれですか？",
+        "options": [
+            "AWS CodeBuild",
+            "AWS CodeDeploy",
+            "AWS CodePipeline",
+            "Amazon CloudFront"
+        ],
+        "answer": 1,
+        "explanation": "CodeDeployは、インプレースデプロイやブルー/グリーンデプロイなどの手法を自動化し、ダウンタイムを最小限にします。"
+    },
+    {
+        "text": "CodeDeploy で、デプロイの手順（ファイルの配置先やフックするスクリプト等）を定義するファイル名はどれですか？",
+        "options": [
+            "buildspec.yml",
+            "appspec.yml",
+            "deploy.config",
+            "manifest.json"
+        ],
+        "answer": 1,
+        "explanation": "AppSpecファイルを使用して、デプロイ時の動作（BeforeInstall, AfterInstallなどのライフサイクルイベント）を制御します。"
+    },
+    {
+        "text": "ECS Fargate におけるブルー/グリーンデプロイメントのメリットは何ですか？",
+        "options": [
+            "料金を半額にする",
+            "新しいバージョン（グリーン）を検証済みの状態で本番（ブルー）と切り替えることで、リスクとダウンタイムを大幅に低減できる",
+            "色のついたコンテナを使用できる",
+            "物理サーバが不要になる"
+        ],
+        "answer": 1,
+        "explanation": "トラフィックの重みを徐々に変更したり、一気に切り替えたりすることで、安全なリリースが可能です。"
+    },
+    {
+        "text": "Git ベースのソースコード管理をAWS上で安全かつプライベートに行うためのリポジトリサービスはどれですか？",
+        "options": [
+            "Amazon S3",
+            "AWS CodeCommit",
+            "AWS CodeBuild",
+            "GitHub Enterprise"
+        ],
+        "answer": 1,
+        "explanation": "CodeCommitを使用すると、独自のGitリポジトリをホストし、IAMと連携してアクセス管理ができます。"
+    },
+    {
+        "text": "CodePipeline で、前のステージの結果を次のステージに渡すための一時的な成果物を何と呼びますか？",
+        "options": [
+            "キャッシュ",
+            "アーティファクト (Artifact)",
+            "バックアップ",
+            "メッセージ"
+        ],
+        "answer": 1,
+        "explanation": "ソースコードのZipやビルド後のJarファイルなどを「アーティファクト」としてS3バケットを介して受け渡します。"
+    },
+    {
+        "text": "ECSにおける「容量プロバイダー (Capacity Provider)」とは何ですか？",
+        "options": [
+            "物理サーバを売ってくれる会社",
+            "ECSサービスが使用するインフラストラクチャ（FargateやASG）との接続・スケーリングを管理するもの",
+            "電気代を払うための仕組み",
+            "コンテナの名前を決める人"
+        ],
+        "answer": 1,
+        "explanation": "コンテナを実行するための基盤（FargateかEC2か）をどのように利用し、拡張するかを柔軟に定義します。"
+    },
+    {
+        "text": "コンテナ技術が仮想マシン（VM）と比較して優れている点として不適切なものはどれですか？",
+        "options": [
+            "起動が高速である",
+            "リソースの消費が少ない(軽量)",
+            "OSのカーネルを共有せず、完全に独立した物理サーバとして動作する",
+            "ポータビリティ（持ち運びやすさ）に優れる"
+        ],
+        "answer": 2,
+        "explanation": "コンテナはホストOSのカーネルを「共有」します。VMは各インスタンスが独自のカーネル（ゲストOS）を持ちます。"
+    },
+    {
+        "text": "ECRにおいて、特定の古いコンテナイメージを自動的に削除し、コストを抑える機能を何と呼びますか？",
+        "options": [
+            "バージョニング",
+            "ライフサイクルポリシー (Lifecycle Policy)",
+            "ガベージコレクション",
+            "有効期限設定"
+        ],
+        "answer": 1,
+        "explanation": "S3と同様に、タグのないイメージや古いイメージを自動整理するルールを設定可能です。"
+    },
+    {
+        "text": "CodeDeploy のデプロイ設定「AllAtOnce」を選択した場合の挙動は？",
+        "options": [
+            "1台ずつ順番にデプロイする",
+            "すべてのターゲットに一斉にデプロイするため、一時的なサービス停止（ダウンタイム）が発生する可能性がある",
+            "デプロイを行わない",
+            "自動的に10回に分ける"
+        ],
+        "answer": 1,
+        "explanation": "最も速いリリース手法ですが、更新中にトラフィックを受けるインスタンスがなくなる可能性があるため、注意が必要です。"
+    },
+    {
+        "text": "ECRからコンテナイメージをダウンロード(Pull)するために実行する一般的なコマンドのプレフィックスは？",
+        "options": [
+            "git pull",
+            "docker pull",
+            "aws download",
+            "ftp get"
+        ],
+        "answer": 1,
+        "explanation": "ECRは標準のDockerレジストリ APIと互換性があるため、通常のDockerコマンドが使用できます。"
+    },
+    {
+        "text": "CodeBuild の実行ログを確認する際に最も適した場所はどこですか？",
+        "options": [
+            "EC2 インスタンス内",
+            "Amazon CloudWatch Logs",
+            "RDS データベース",
+            "Route 53 設定"
+        ],
+        "answer": 1,
+        "explanation": "ビルド時の標準出力はCloudWatch Logsにストリーミングされ、リアルタイムで確認できます。"
+    },
+    {
+        "text": "AWSにおける「Infrastructure as Code (IaC)」を実現するための中心的なサービスは何ですか？",
+        "options": [
+            "Amazon ECS",
+            "AWS CloudFormation",
+            "AWS CodeDeploy",
+            "Amazon CloudWatch"
+        ],
+        "answer": 1,
+        "explanation": "テンプレート（JSON/YAML）を記述し、AWSリソースを自動的に構築・更新・管理します。Terraform等もこの概念に含まれます。"
+    }
+]
